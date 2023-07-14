@@ -30,13 +30,8 @@ const LoginForm = () => {
         name="passwordInput"
       ></input>
       <button
-        onClick={
-          // handleSubmit = (event) => {
-          //   event.preventDefault();
-          //   console.log(event.target.elements.usernameInput.value);
-          //   console.log(event.target.elements.passwordInput.value);
-          // };
-          
+        onClick={() => {
+          console.log("x");
         }}
       >
         Zaloguj

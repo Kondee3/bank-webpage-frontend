@@ -18,7 +18,7 @@ export const ChatUsers = () => {
       .catch((error) => {
         console.log(error);
       });
-  });
+  }, []);
   return (
     <Button
       onClick={() => {

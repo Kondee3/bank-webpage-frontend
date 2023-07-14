@@ -32,7 +32,7 @@ function App() {
         {userVisible && <ChatUsers></ChatUsers>} */}
       </div>
 
-      {/* <ChatUsers></ChatUsers> */}
+      <ChatUsers></ChatUsers>
     </>
   );
 }
