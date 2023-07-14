@@ -1,0 +1,25 @@
+
+.navbar .navbar-nav .nav-item{
+    font-size: 1em;
+}
+
+.navbar .navbar-nav .nav-item:hover{
+  color: black;
+  background-color:  rgba(255, 255, 255, 0.02);
+  text-shadow: 0 0 0.2em white;
+}
+
+  @media only screen and (min-width: 992px) {
+    .navbar .navbar-nav .nav-link {
+      padding: 1em 0.7em;
+    }
+  }
+  
+.carousel-item {
+  height: 100vh;
+  background: no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}

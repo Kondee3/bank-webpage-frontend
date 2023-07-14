@@ -1,0 +1,16 @@
+[
+    {
+    "id": 1,
+    "userName": "kondi",
+    "email": "smyrakkonrad@gmail.com",
+    "dateOfBirth": "2000-07-05",
+    "age": 23
+    },
+    {
+    "id": 2,
+    "userName": "miranda",
+    "email": "miranda@gmail.com",
+    "dateOfBirth": "1990-05-02",
+    "age": 33
+    }
+    ]
