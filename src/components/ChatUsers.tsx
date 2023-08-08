@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import Button from "./Button";
 
-export interface ChatUser {
+
+export const ChatUsers = () => {
+
+interface ChatUser {
   id: number;
   user_name: string;
   email: string;
@@ -9,20 +12,21 @@ export interface ChatUser {
   age: number;
 }
 
-export const ChatUsers = () => {
-  const [user, setUser] = useState();
+  const [user, setUsers] = useState();
+  const [error, setError] = useState({});
   useEffect(() => {
-    fetch("http://localhost:8000/api/v1/user/get")
+    fetch("http://127.0.0.1:8080/api/v1/user/get")
       .then((response) => response.json())
-      .then((res) => setUser(res))
-      .catch((error) => {
-        console.log(error);
-      });
+      .then((res) => setUsers(res as ChatUser))
+      .catch((err) => setError(err));
   }, []);
   return (
     <Button
       onClick={() => {
-        user !== null && console.log(user);
+        (user != null ? console.log(user.user_name) :
+        console.log('Loading...'));
+        (error != null ? console.warn(error) :
+        console.log('Loading errors...'))
       }}
     >
       read

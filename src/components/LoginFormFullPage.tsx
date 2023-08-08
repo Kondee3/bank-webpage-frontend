@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 
 interface User {
@@ -5,7 +6,7 @@ interface User {
     password_form: string;
 }
 
-const LoginForm = () => {
+const LoginFormFullPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
@@ -26,9 +27,9 @@ const LoginForm = () => {
             }
             postmethod(event, user);
 
-        }} className="d-flex justify-content-end my-2 w-40">
+        }} className="mx-5 my-5 col-3 row-1 " style={{height: '400px'}}> 
             <input
-                className="form-control col-xs-2"
+                className="form-control"
                 type="text"
                 placeholder="Użytkownik"
                 aria-label="Search"
@@ -36,14 +37,14 @@ const LoginForm = () => {
                 name="username"
             ></input>
             <input
-                className="form-control col-xs-2 mx-2"
+                className="form-control my-3 "
                 type="password"
                 placeholder="Hasło"
                 aria-label="Search"
                 onChange={handleChangePassword}
                 name="password"
             ></input>
-            <button className="btn btn-outline-success col-xs-2">
+            <button className="btn btn-outline-success">
                 Zaloguj
             </button>
         </form>
@@ -65,4 +66,4 @@ function postmethod(event: React.FormEvent<HTMLFormElement>, user: User) {
 }
 
 
-export default LoginForm;
+export default LoginFormFullPage;
