@@ -1,21 +1,13 @@
 import { ReactNode } from "react";
 interface Props {
   children: ReactNode;
-  onClose: () => void;
 }
 
-const Alert = ({ children, onClose }: Props) => {
+const Alert = ({ children }: Props) => {
   return (
-    <div className="alert alert-primary alert-dismissible">
+    <span className="alert alert-danger">
       {children}
-      <button
-        type="button"
-        data-bs-dismiss="alert"
-        className="btn-close"
-        aria-label="Close"
-        onClick={onClose}
-      ></button>
-    </div>
+    </span>
   );
 };
 

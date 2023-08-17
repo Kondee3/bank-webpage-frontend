@@ -1,66 +1,81 @@
 import { useState } from "react";
 
+interface Props {
+    formClassname?: string;
+    inputClassname: string;
+    buttonClassname: string;
+}
 interface User {
-    username_form: string;
+    email_form: string;
     password_form: string;
 }
+interface ResponseState {
+    state: string;
+}
 
-const LoginForm = () => {
-    const [username, setUsername] = useState("");
+const LoginForm = ({ formClassname, inputClassname, buttonClassname }: Props) => {
+    const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
-        setPassword(event.target.value);
+        const target = event.target as HTMLInputElement;
+        setPassword(target.value);
     };
 
-    const handleChangeUsername = (event: React.FormEvent<HTMLInputElement>) => {
-        setUsername(event.target.value);
+    const handleChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
+        const target = event.target as HTMLInputElement;
+        setEmail(target.value);
     };
 
     return (
-        <form onSubmit={(event) => {
-
+        <form className={formClassname} onSubmit={(event) => {
             const user: User = {
-                username_form: username,
+                email_form: email,
                 password_form: password
             }
-            postmethod(event, user);
 
-        }} className="d-flex justify-content-end my-2 w-40">
+            postmethod(event, user)
+                .then((res: string) => console.log(res))
+                .catch((err) => console.log(err));
+
+
+        }} >
             <input
-                className="form-control col-xs-2"
+                className={inputClassname}
                 type="text"
-                placeholder="Użytkownik"
+                placeholder="Email"
                 aria-label="Search"
-                onChange={handleChangeUsername}
+                onChange={handleChangeEmail}
                 name="username"
             ></input>
             <input
-                className="form-control col-xs-2 mx-2"
+                className={inputClassname}
                 type="password"
                 placeholder="Hasło"
                 aria-label="Search"
                 onChange={handleChangePassword}
                 name="password"
             ></input>
-            <button className="btn btn-outline-success col-xs-2">
+            <button className={buttonClassname}>
                 Zaloguj
             </button>
         </form>
     );
 };
-function postmethod(event: React.FormEvent<HTMLFormElement>, user: User) {
-
+async function postmethod(event: React.FormEvent<HTMLFormElement>, user: User): Promise<string> {
+    let responseState = "";
     event.preventDefault();
-    console.log(user);
-    fetch('http://127.0.0.1:8080/api/v1/user/add', {
+    await fetch('http://127.0.0.1:8080/api/v1/user/login', {
         method: 'POST',
         body: JSON.stringify(user),
         headers: {
             'Content-type': 'application/json; charset=UTF-8',
         },
-    }).catch((err) => console.log(err));
-
+    })
+        .then((response) => response.json())
+        .then((res: ResponseState) => responseState = res.state.toString())
+        .catch((err) => console.log(err));
+    return responseState;
 
 }
 
