@@ -4,10 +4,12 @@ interface Props {
     withLogin: boolean;
 }
 const Navbar = ({ withLogin }: Props) => {
-    //navbar    fixed-top to make navbar move while scroll
     return (
+           // fixed-top className makes navbar move 
         <header>
-            <nav className="navbar nav-underline navbar-dark navbar-inverse fixed-top navbar-fixed-top bg-dark py-0 navbar-expand-lg navbar-default">
+            <nav className="navbar nav-underline navbar-dark navbar-inverse 
+            navbar-fixed-top bg-dark py-0 navbar-expand-md navbar-expand-lg
+            navbar-expand-xl navbar-default">
                 <div className="container-fluid">
                     <a className="navbar-brand" role="button" href="/">
                         Bank
@@ -63,7 +65,7 @@ const Navbar = ({ withLogin }: Props) => {
                             </li>
                         </ul>
                         {withLogin && <LoginForm formClassname="d-flex justify-content-end my-2"
-                            inputClassname="form-control col-xs-2 mx-2 w-40" buttonClassname="btn btn-outline-success col-2"></LoginForm>}
+                            inputClassname="form-control col-xs-2  w-40" buttonClassname="btn btn-outline-success col-2" isNavbar={true}></LoginForm>}
                     </div>
                 </div>
             </nav>

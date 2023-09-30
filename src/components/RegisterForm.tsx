@@ -1,5 +1,5 @@
 import { useState } from "react";
-import span from "./span";
+import { sha256  } from "js-sha256";
 interface Props {
     inputClassname: string;
     buttonClassname: string;
@@ -101,7 +101,7 @@ const RegisterForm = ({ inputClassname, buttonClassname }: Props) => {
 
             const user: User = {
                 username_form: input.username,
-                password_form: input.password,
+                password_form: sha256(input.password),
                 email_form: input.email,
                 date_form: input.date,
             }

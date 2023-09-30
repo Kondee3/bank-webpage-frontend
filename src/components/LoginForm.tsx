@@ -1,9 +1,11 @@
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-
+import { sha256 } from "js-sha256";
 interface Props {
     formClassname?: string;
     inputClassname: string;
     buttonClassname: string;
+    isNavbar?: boolean;
 }
 interface User {
     email_form: string;
@@ -13,49 +15,94 @@ interface ResponseState {
     state: string;
 }
 
-const LoginForm = ({ formClassname, inputClassname, buttonClassname }: Props) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+const LoginForm = ({ formClassname, inputClassname, buttonClassname, isNavbar }: Props) => {
 
-    const handleChangePassword = (event: React.FormEvent<HTMLInputElement>) => {
-        const target = event.target as HTMLInputElement;
-        setPassword(target.value);
-    };
+    const [response, setResponse] = useState({});
+    const [input, setInput] = useState({
+        email: '',
+        password: '',
+    });
 
-    const handleChangeEmail = (event: React.FormEvent<HTMLInputElement>) => {
-        const target = event.target as HTMLInputElement;
-        setEmail(target.value);
-    };
+    const [error, setError] = useState({
+        email: '',
+        password: '',
+    })
 
+    const onInputChange = e => {
+        const { name, value } = e.target;
+        setInput(prev => ({
+            ...prev,
+            [name]: value
+        }));
+        validateInput(e);
+    }
+    const validateInput = e => {
+        const { name, value } = e.target;
+        setError(prev => {
+            const stateObj = { ...prev, [name]: "" };
+
+            switch (name) {
+                case "email":
+                    if (!value) {
+                        stateObj[name] = "Please enter Username.";
+                    }
+                    break;
+
+                case "password":
+                    if (!value) {
+                        stateObj[name] = "Please enter Password.";
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return stateObj;
+        });
+    }
+
+    const inputValidationFormat = (error: string) => {
+        return error && (inputClassname + " is-invalid") || inputClassname;
+    }
+    const navigate = useNavigate();
     return (
         <form className={formClassname} onSubmit={(event) => {
             const user: User = {
-                email_form: email,
-                password_form: password
+                email_form: input.email,
+                password_form: sha256(input.password)
             }
 
             postmethod(event, user)
-                .then((res: string) => console.log(res))
+                .then((res: string) => setResponse(res))
                 .catch((err) => console.log(err));
-
+            if (response == "SUCCESS") {
+                navigate("/user/dashboard");
+            }
 
         }} >
-            <input
-                className={inputClassname}
-                type="text"
-                placeholder="Email"
-                aria-label="Search"
-                onChange={handleChangeEmail}
-                name="username"
-            ></input>
-            <input
-                className={inputClassname}
-                type="password"
-                placeholder="Hasło"
-                aria-label="Search"
-                onChange={handleChangePassword}
-                name="password"
-            ></input>
+            <div className={"form-floating"}>
+                <input
+                    className={inputValidationFormat(error.email)}
+                    type="email"
+                    aria-label="Search"
+                    onChange={onInputChange}
+                    onBlur={validateInput}
+                    name="email"
+                ></input>
+                <label htmlFor="email" children="Email" />
+                {error.email && <span className="invalid-feedback">{error.email}</span>}
+            </div>
+            <div className={isNavbar && "mx-3 form-floating" || "form-floating"}>
+                <input
+                    className={inputValidationFormat(error.password)}
+                    type="password"
+                    aria-label="Search"
+                    onChange={onInputChange}
+                    onBlur={validateInput}
+                    name="password"
+                ></input>
+                <label htmlFor="password" children="Hasło" />
+                {error.password && <span className="invalid-feedback">{error.password}</span>}
+            </div>
             <button className={buttonClassname}>
                 Zaloguj
             </button>

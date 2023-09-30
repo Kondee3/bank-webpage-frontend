@@ -1,73 +1,28 @@
-import "./Main.css";
 import Navbar from "./Navbar";
 const Main = () => {
     return (
         <>
             <Navbar withLogin={true}></Navbar>
-            <div id="demo" className="carousel slide " data-bs-ride="carousel">
-                <div className="carousel-indicators">
-                    <button
-                        type="button"
-                        data-bs-target="#demo"
-                        data-bs-slide-to="0"
-                        className="active"
-                    ></button>
-                    <button
-                        type="button"
-                        data-bs-target="#demo"
-                        data-bs-slide-to="1"
-                    ></button>
-                    <button
-                        type="button"
-                        data-bs-target="#demo"
-                        data-bs-slide-to="2"
-                    ></button>
-                </div>
-
-                <div className="carousel-inner">
-                    <div className="carousel-item active">
-                        <img
-                            src="src/assets/bank1.avif"
-                            alt="Los Angeles"
-                            className="d-block w-100"
-                        ></img>
-                        <div className="carousel-caption d-none d-md-block">
-                            <h1>Witaj</h1>
-                            <p>Zaloguj się, aby zarządzać swoimi oszczędnościami!</p>
+            <div className="bg-dark w3-animate-top " style={{height:"100vh"}}>
+                <div className="text-center card-group container-xl container-fluid">
+                    <div className="card mx-2 rounded-bottom-5 rounded-top-0 d-flex align-items-stretch">
+                        <img src="src/assets/bank1.avif" className="card-img-top h-100" alt="..." />
+                        <div className="card-body" >
+                            <h5 className="card-title">Odwiedzasz nas ponownie?</h5>
+                            <p className="card-text">Zaloguj się, aby zarządzać swoimi oszczędnościami!</p>
+                            <a href="login" className="btn btn-primary">Logowanie</a>
                         </div>
                     </div>
-                    <div className="carousel-item">
-                        <img
-                            src="src/assets/bank2.jpg"
-                            alt="Chicago"
-                            className="d-block w-100"
-                        ></img>
-                    </div>
-                    <div className="carousel-item">
-                        <img
-                            src="src/assets/bank3.jpeg"
-                            alt="New York"
-                            className="d-block w-100"
-                        ></img>
+
+                    <div className="card  mx-2 rounded-bottom-5 rounded-top-0 d-flex align-items-stretch">
+                        <img src="src/assets/bank2.jpg" className="card-img-top h-100 " alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title">Jesteś tu pierwszy raz?</h5>
+                            <p className="card-text">Zarejestruj się, aby poznać naszą ofertę!</p>
+                            <a href="register" className="btn btn-primary">Rejestracja</a>
+                        </div>
                     </div>
                 </div>
-
-                <button
-                    className="carousel-control-prev"
-                    type="button"
-                    data-bs-target="#demo"
-                    data-bs-slide="prev"
-                >
-                    <span className="carousel-control-prev-icon"></span>
-                </button>
-                <button
-                    className="carousel-control-next"
-                    type="button"
-                    data-bs-target="#demo"
-                    data-bs-slide="next"
-                >
-                    <span className="carousel-control-next-icon"></span>
-                </button>
             </div>
         </>
     );
