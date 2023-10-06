@@ -14,7 +14,7 @@ const Dashboard = () => {
                                 <img src="/src/assets/dollar.jpg" className="my-1 img-fluid "></img>
                             </div>
                             <div className="col-md-6 ">
-                                <h3 className="">Stan Konta: 4000zł</h3>
+                                <h3 className="">Stan Konta: 4000złx</h3>
                                 <a className="btn btn-warning card-title pe-auto">Historia</a>
                             </div>
                         </div>
