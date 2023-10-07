@@ -10,6 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/uuid": "^9.0.4",
     "bootstrap": "^5.3.1",
     "css-loader": "^6.8.1",
     "js-sha256": "^0.10.1",
@@ -19,7 +20,8 @@
     "react-router-dom": "^6.14.2",
     "sass": "^1.65.1",
     "sass-loader": "^13.3.2",
-    "style-loader": "^3.3.3"
+    "style-loader": "^3.3.3",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.14",

@@ -1,7 +1,8 @@
 import Navbar from "./Navbar"
-
+import { useNavigate } from "react-router-dom";
 const Dashboard = () => {
     document.title = "Bank Panel";
+    var navigate = useNavigate();
     return (
         <>
 
@@ -15,14 +16,14 @@ const Dashboard = () => {
                             </div>
                             <div className="col-md-6 ">
                                 <h3 className="">Stan Konta: 4000złx</h3>
-                                <a className="btn btn-warning card-title pe-auto">Historia</a>
+                                <a className="btn btn-warning card-title pe-auto" role="button" onClick={() => navigate("/user/history")} >Historia</a>
                             </div>
                         </div>
                     </div>
 
                     <div className="card mx-2 rounded-5">
                         <a href="post">
-                            <div role="button" className="row container-fluid text-center align-items-center">
+                            <div role="button" onClick={() => navigate("/user/post")} className="row container-fluid text-center align-items-center">
                                 <div className="col-md-6">
                                     <img src="/src/assets/post.png" className="my-1 img-fluid "></img>
                                 </div>
@@ -36,7 +37,7 @@ const Dashboard = () => {
                 <div className="card-group container-xl container-fluid">
                     <div className="card mx-2 rounded-5">
                         <a href="post">
-                            <div role="button" className="row container-fluid text-center align-items-center">
+                            <div role="button" onClick={() => navigate("/user/shop")} className="row container-fluid text-center align-items-center">
                                 <div className="col-md-6">
                                     <img src="/src/assets/myshop.jpg" className="my-1 img-fluid "></img>
                                 </div>
@@ -49,7 +50,7 @@ const Dashboard = () => {
 
                     <div className="card mx-2 rounded-5">
                         <a href="post">
-                            <div role="button" className="row container-fluid text-center align-items-center">
+                            <div role="button" onClick={() => navigate("/user/shops")} className="row container-fluid text-center align-items-center">
                                 <div className="col-md-6">
                                     <img src="/src/assets/sklep.png" className="my-1 img-fluid "></img>
                                 </div>
