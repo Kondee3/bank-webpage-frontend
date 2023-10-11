@@ -10,7 +10,7 @@ const Navbar = ({ withLogin }: Props) => {
             <nav className="navbar nav-underline navbar-dark navbar-inverse 
             navbar-fixed-top bg-dark py-0 navbar-expand-md navbar-expand-lg
             navbar-expand-xl navbar-default">
-                <div className="container-fluid">
+                <div className="container-fluid align-items-center">
                     <a className="navbar-brand" role="button" href="/">
                         Bank
                     </a>
@@ -26,7 +26,7 @@ const Navbar = ({ withLogin }: Props) => {
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                        <ul className="navbar-nav me-auto mx-2 mb-2  mb-lg-0">
                             <li className="nav-item">
                                 <a className="nav-link" aria-current="page" href="/">
                                     Home
@@ -64,8 +64,8 @@ const Navbar = ({ withLogin }: Props) => {
                                 </ul>
                             </li>
                         </ul>
-                        {withLogin && <LoginForm formClassname="d-flex justify-content-end my-2"
-                            inputClassname="form-control col-xs-2  w-40" buttonClassname="btn btn-outline-success col-2" isNavbar={true}></LoginForm>}
+                        {withLogin && <LoginForm formClassname="d-flex justify-content-end my-2" 
+                            inputClassname="form-control col-xs-2  w-40" buttonClassname="btn btn-success col-1" isNavbar={true}></LoginForm>}
                     </div>
                 </div>
             </nav>
