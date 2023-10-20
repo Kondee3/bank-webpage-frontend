@@ -28,7 +28,7 @@ const LoginForm = ({ formClassname, inputClassname, buttonClassname, isNavbar }:
         password: '',
     })
 
-    const onInputChange = e => {
+    const onInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setInput(prev => ({
             ...prev,
@@ -36,7 +36,7 @@ const LoginForm = ({ formClassname, inputClassname, buttonClassname, isNavbar }:
         }));
         validateInput(e);
     }
-    const validateInput = e => {
+    const validateInput = (e: React.ChangeEvent<HTMLInputElement>)  => {
         const { name, value } = e.target;
         setError(prev => {
             const stateObj = { ...prev, [name]: "" };
@@ -103,7 +103,7 @@ const LoginForm = ({ formClassname, inputClassname, buttonClassname, isNavbar }:
                 <label htmlFor="password" children="Hasło" />
                 {error.password && <span className="invalid-feedback">{error.password}</span>}
             </div>
-            <button className={buttonClassname}>
+            <button role="submit" className={buttonClassname}>
                 Zaloguj
             </button>
         </form>
