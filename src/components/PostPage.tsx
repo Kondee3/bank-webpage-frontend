@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Mail from "./Mail";
 import Navbar from "./Navbar";
 export interface MailData {
   sender_email: string;
   receiver_email: string;
-  time_sent: string;
+  time_sent: Date;
   title: string;
   content: string;
 }
 interface User {
   email_form: string;
   password_form: string;
+}
+function createMail() {
+  const navigate = useNavigate();
+  navigate("/user/post/create");
 }
 const PostPage = () => {
   const [mails, setMails] = useState<MailData[]>();
@@ -39,7 +44,9 @@ const PostPage = () => {
         style={{ minHeight: "100vh" }}
       >
         <div className="container-xl my-3 container bg-dark ">
-          <button className="btn btn-primary btn-lg">Stwórz</button>
+          <button onClick={createMail} className="btn btn-primary btn-lg">
+            Stwórz
+          </button>
         </div>
         <div className="accordion container-xl container bg-dark ">
           <div key="column-name" className="accordion-item col-md-12">
