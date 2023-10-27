@@ -17,6 +17,8 @@ interface ResponseState {
 
 const LoginForm = ({ formClassname, inputClassname, buttonClassname, isNavbar }: Props) => {
 
+export interface MailData {
+}
     const [response, setResponse] = useState({});
     const [input, setInput] = useState({
         email: '',
