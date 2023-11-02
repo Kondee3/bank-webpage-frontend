@@ -107,22 +107,15 @@ const PostCreate = () => {
             <label htmlFor="floatingInput">Text</label>
           </div>
           <button
-            onClick={sendMail((event) => {
-              const mail: MailData = {
-                                senderEmail: "twójstary@gmail.com",
-    receiverEmail: "jan@gmail.com",
-    timeSent: Date(), 
-    title: "xd1",
-    content: "1"
-                            };
-
-              let response = postmethod(event, user)
-                .then((res: string) => setResponse(res))
-                .catch((err) => console.log(err));
-              if (response.ok) {
-                console.log("ok");
-              }
-            })}
+            onClick={sendMail((event) ,
+              {
+                senderEmail: "xd@gmail.com",
+                receiverEmail: input.receiver_email, 
+                timeSent: Date(),
+                title: input.title, 
+                content: input.content,
+              
+                            })}
             className="btn btn-primary btn-lg"
           >
             Stwórz
