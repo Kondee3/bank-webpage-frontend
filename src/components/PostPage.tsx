@@ -52,15 +52,15 @@ const PostPage = () => {
            Odśwież 
           </button>
         </div>
-        <table className="mx-4 table table-hover table-dark">
+        <table className=" mx-4 table table-hover   table-striped table-dark">
           <thead >
-            <tr className="d-flex fs-3 me-5  ">
+            <tr className="d-flex fs-3 me-5 mb-3 ">
               <th className="col">Email</th>
               <th className="col">Title</th>
               <th className="col ">Date</th>
             </tr>
           </thead>
-          <tbody className="fs-5">
+          <tbody className="fs-5 ">
             {mails != undefined && mails.length > 0 &&
               mails.map((item: MailData, index) => (
                 <Mail

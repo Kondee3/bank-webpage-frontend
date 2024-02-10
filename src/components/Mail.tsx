@@ -8,7 +8,8 @@ const Mail = ({ mailKey, item }: Props) => {
     <>
       <tr
         key={mailKey}
-        className="accordion-item me-5 d-flex border-dark"
+        className="accordion-item me-5 d-flex "
+
         role="button"
         data-bs-toggle="collapse"
         data-bs-target={"#mail-" + mailKey}
@@ -17,9 +18,9 @@ const Mail = ({ mailKey, item }: Props) => {
         <td className="col border-dark">{item.title}</td>
         <td className="col border-dark">{item.timeSent.toString()}</td>
       </tr>
-      <tr className="border-dark">
-        <td className="border-dark" colSpan={3}>
-          <div id={"mail-" + mailKey} className="accordion-collapse border rounded me-5 text-wrap collapse accordion-body">
+      <tr className="border-left border-right">
+        <td className="border-dark " colSpan={3}>
+          <div id={"mail-" + mailKey} className="accordion-collapse bg-dark-subtle border-bottom rounded-bottom me-5 text-wrap collapse accordion-body">
               {item.content}
           </div>
         </td>
