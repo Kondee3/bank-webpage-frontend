@@ -20,7 +20,7 @@ const Mail = ({ mailKey, item }: Props) => {
       </tr>
       <tr className="border-left border-right">
         <td className="border-dark " colSpan={3}>
-          <div id={"mail-" + mailKey} className="accordion-collapse bg-dark-subtle border-bottom rounded-bottom me-5 text-wrap collapse accordion-body">
+          <div id={"mail-" + mailKey} className="accordion-collapse bg-dark  rounded-bottom me-5 text-wrap collapse accordion-body">
               {item.content}
           </div>
         </td>
