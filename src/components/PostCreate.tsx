@@ -1,6 +1,8 @@
 import { MailData } from "./PostPage";
 import { useState } from "react";
 import Navbar from "./Navbar";
+import axios, { HttpStatusCode } from "axios";
+import { AxiosResponse } from "axios";
 
 const PostCreate = () => {
   const [input, setInput] = useState({
@@ -9,6 +11,7 @@ const PostCreate = () => {
     content: "",
   });
 
+    const[response, setResponse] = useState<HttpStatusCode>();
   const [error, setError] = useState({
     receiver_email: "",
     title: "",
@@ -107,44 +110,38 @@ const PostCreate = () => {
             <label htmlFor="floatingInput">Text</label>
           </div>
           <button
-            onClick={sendMail((event) => {
+            onClick={(event) => {
               const mail: MailData = {
-                                senderEmail: "twójstary@gmail.com",
-    receiverEmail: "jan@gmail.com",
-    timeSent: Date(), 
-    title: "xd1",
-    content: "1"
-                            };
-
-              let response = postmethod(event, user)
-                .then((res: string) => setResponse(res))
+                senderEmail: "smyrakkonrad@gmail.com",
+                receiverEmail: input.receiver_email,
+                timeSent: new Date(),
+                title: input.title,
+                content: input.content,
+              };
+              sendMail(event, mail)
+                .then((res: HttpStatusCode) => setResponse(res))
                 .catch((err) => console.log(err));
-              if (response.ok) {
-                console.log("ok");
-              }
-            })}
+
+            }}
             className="btn btn-primary btn-lg"
           >
             Stwórz
           </button>
+          {response ? response == HttpStatusCode.Ok ?<label className="mx-2 text-success">Mail Sent</label> : <label className="text-danger"> Failed</label> : '' }
         </div>
       </div>
     </>
   );
 };
 async function sendMail(
-  event: React.FormEvent<HTMLFormElement>,
+  event: React.MouseEvent<HTMLButtonElement, MouseEvent>,
   mail: MailData,
-) {
+): Promise<HttpStatusCode> {
   event.preventDefault();
-  await fetch("http://127.0.0.1:8080/api/v1/user/post/sendmail", {
-    method: "POST",
-    body: JSON.stringify(mail),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-    .then((response) => response.json())
+  let res = 0;
+  await axios.post("http://192.168.0.5:8080/api/v1/user/post/sendmail", mail)
+    .then((response: AxiosResponse) => res = response.status)
     .catch((err) => console.log(err));
+  return res;
 }
 export default PostCreate;

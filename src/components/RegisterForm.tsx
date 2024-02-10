@@ -1,5 +1,7 @@
 import { sha256 } from "js-sha256";
-import {  useState } from "react";
+import {  useState} from "react";
+import axios, { AxiosResponse } from "axios";
+import { useNavigate } from "react-router-dom";
 interface Props {
   inputClassname: string;
   buttonClassname: string;
@@ -13,6 +15,8 @@ interface User {
 }
 
 const RegisterForm = ({ inputClassname, buttonClassname }: Props) => {
+    
+  const navigate = useNavigate();
   const [input, setInput] = useState({
     username: "",
     password: "",
@@ -106,8 +110,10 @@ const RegisterForm = ({ inputClassname, buttonClassname }: Props) => {
         };
 
         postmethod(event, user)
-          .then((res: Response) => {
-            !res.ok   && setDuplicate(true);
+          .then((status: number) => {
+                if (status ==200){
+                            navigate("/login");
+                        }else navigate("user/error"); 
           })
           .catch((err) => console.log(err));
       }}
@@ -195,22 +201,15 @@ const RegisterForm = ({ inputClassname, buttonClassname }: Props) => {
 async function postmethod(
   event: React.FormEvent<HTMLFormElement>,
   user: User,
-): Promise<Response> {
+): Promise<number> {
   event.preventDefault();
-  let response = await fetch("http://127.0.0.1:8080/api/v1/user/register", {
-    method: "POST",
-    body: JSON.stringify(user),
-    headers: {
-      "Content-type": "application/json; charset=UTF-8",
-    },
-  })
-        .then((res)=> {
-            if(res.ok){
-                return res.json();
-            }
-        })
+    let r = 0;
+  await axios.post("http://192.168.0.5:8080/api/v1/user/register", user
+    
+  )
+        .then((response: AxiosResponse)=>  r = response.status)
     .catch((err) => console.log(err));
-  return response;
+  return r;
 }
 
 export default RegisterForm;

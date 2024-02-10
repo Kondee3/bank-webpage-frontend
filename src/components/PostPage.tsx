@@ -1,72 +1,75 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { AxiosResponse } from "axios";
 import Mail from "./Mail";
 import Navbar from "./Navbar";
 export interface MailData {
-  sender_email: string;
-  receiver_email: string;
-  time_sent: Date;
+  senderEmail: string;
+  receiverEmail: string;
+  timeSent: Date;
   title: string;
   content: string;
 }
 interface User {
-  email_form: string;
-  password_form: string;
-}
-function createMail() {
-  const navigate = useNavigate();
-  navigate("/user/post/create");
+  email: string;
+  password: string;
 }
 const PostPage = () => {
-  const [mails, setMails] = useState<MailData[]>();
-  let user: User = {
-    email_form: "jan@gmail.com",
-    password_form: "xd",
-  };
   useEffect(() => {
-    fetch("http://127.0.0.1:8080/api/v1/user/getmails", {
-      method: "POST",
-      body: JSON.stringify(user),
-      headers: {
-        "Content-type": "application/json; charset=UTF-8",
-      },
-    })
-      .then((response) => response.json())
-      .then((res: MailData[]) => setMails(res))
-      .catch((err) => console.log(err));
+    async function fetchMailData() {
+      let user: User = {
+        email: "smyrakkonrad@gmail.com",
+        password: "",
+      };
+      await axios.post("http://192.168.0.5:8080/api/v1/user/post/getmails", user)
+        .then((response: AxiosResponse) => setMails(response.data))
+        .catch((err) => console.log(err));
+    }
+    fetchMailData();
   }, []);
+
+  const [mails, setMails] = useState<MailData[]>();
+  const navigate = useNavigate();
   return (
     <>
       <Navbar withLogin={false} />
 
       <div
-        className="bg-dark py-5"
+        className="bg-dark py-5 "
         style={{ minHeight: "100vh" }}
       >
-        <div className="container-xl my-3 container bg-dark ">
-          <button onClick={createMail} className="btn btn-primary btn-lg">
+        <div className="mx-4 py-4 bg-dark ">
+          <button
+            onClick={() => navigate("/user/post/create")}
+            className="btn btn-primary btn-lg"
+          >
             Stwórz
           </button>
+          <button
+            className="mx-2 btn btn-secondary btn-lg"
+          >
+           Odśwież 
+          </button>
         </div>
-        <div className="accordion container-xl container bg-dark ">
-          <div key="column-name" className="accordion-item col-md-12">
-            <div
-              className="container-fluid d-flex align-items-stretch border-dark accordion-header "
-              role="button"
-            >
-              <h4 className="col">Email</h4>
-              <h4 className="col">Title</h4>
-              <h4 className="col">Date</h4>
-            </div>
-          </div>
-          {mails != undefined && mails.length > 0 &&
-            mails.map((item: MailData, index) => (
-              <Mail
-                id={index}
-                item={item}
-              />
-            ))}
-        </div>
+        <table className="mx-4 table table-hover table-dark">
+          <thead >
+            <tr className="d-flex fs-3 me-5  ">
+              <th className="col">Email</th>
+              <th className="col">Title</th>
+              <th className="col ">Date</th>
+            </tr>
+          </thead>
+          <tbody className="fs-5">
+            {mails != undefined && mails.length > 0 &&
+              mails.map((item: MailData, index) => (
+                <Mail
+                  mailKey={index}
+                  item={item}
+                />
+              ))}
+          </tbody>
+        </table>
       </div>
     </>
   );

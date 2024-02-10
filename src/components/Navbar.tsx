@@ -1,5 +1,6 @@
 import LoginForm from "./LoginForm.tsx";
 import "./Navbar.css";
+import { Link } from "react-router-dom";
 interface Props {
     withLogin: boolean;
 }
@@ -11,9 +12,9 @@ const Navbar = ({ withLogin }: Props) => {
             navbar-fixed-top bg-dark py-0 navbar-expand-md navbar-expand-lg
             navbar-expand-xl navbar-default">
                 <div className="container-fluid align-items-center">
-                    <a className="navbar-brand" role="button" href="/">
+                    <Link className="navbar-brand" role="button" to="/">
                         Bank
-                    </a>
+                    </Link>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -28,38 +29,38 @@ const Navbar = ({ withLogin }: Props) => {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mx-2 mb-2  mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link" aria-current="page" href="/">
+                                <Link className="nav-link" aria-current="page" to="/">
                                     Home
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item">
-                                <a className="nav-link" href="/">
+                                <Link className="nav-link" to="/">
                                     Link
-                                </a>
+                                </Link>
                             </li>
                             <li className="nav-item dropdown">
-                                <a
+                                <Link
                                     className="nav-link dropdown-toggle"
-                                    href="#"
+                                    to="#"
                                     role="button"
                                     data-bs-toggle="dropdown"
                                     aria-expanded="false"
                                 >
                                     Użytkownik
-                                </a>
+                                </Link>
                                 <ul className="dropdown-menu">
                                     <li>
-                                        <a className="dropdown-item" href="register">
+                                        <Link className="dropdown-item" to="/register">
                                             Rejestracja
-                                        </a>
+                                        </Link>
                                     </li>
                                     <li>
                                         <hr className="dropdown-divider"></hr>
                                     </li>
                                     <li>
-                                        <a className="dropdown-item" href="login">
+                                        <Link className="dropdown-item" to="/login">
                                             Logowanie
-                                        </a>
+                                        </Link>
                                     </li>
                                 </ul>
                             </li>

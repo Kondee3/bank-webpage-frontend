@@ -1,27 +1,30 @@
 import { MailData } from "./PostPage";
 interface Props {
-  id: number;
+  mailKey: number;
   item: MailData;
 }
-const Mail = (prop: Props) => {
+const Mail = ({ mailKey, item }: Props) => {
   return (
-    <div key={prop.id} className="accordion-item    ">
-      <div
-        className="container-fluid d-flex align-items-stretch border-dark accordion-header collapsed "
+    <>
+      <tr
+        key={mailKey}
+        className="accordion-item me-5 d-flex border-dark"
         role="button"
         data-bs-toggle="collapse"
-        data-bs-target={"#mail-" + prop.id}
+        data-bs-target={"#mail-" + mailKey}
       >
-        <h4 className="col">{prop.item.sender_email}</h4>
-        <h4 className="col">{prop.item.title}</h4>
-        <h4 className="col">{prop.item.time_sent}</h4>
-      </div>
-      <div id={"mail-" + prop.id} className="accordion-collapse collapse">
-        <div className="accordion-body">
-          <h4 className="">{prop.item.content}</h4>
-        </div>
-      </div>
-    </div>
+        <td className="col border-dark">{item.senderEmail}</td>
+        <td className="col border-dark">{item.title}</td>
+        <td className="col border-dark">{item.timeSent.toString()}</td>
+      </tr>
+      <tr className="border-dark">
+        <td className="border-dark" colSpan={3}>
+          <div id={"mail-" + mailKey} className="accordion-collapse border rounded me-5 text-wrap collapse accordion-body">
+              {item.content}
+          </div>
+        </td>
+      </tr>
+    </>
   );
 };
 export default Mail;
